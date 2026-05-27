@@ -32,27 +32,20 @@ public Proveedor buscarPorId(Long id) {
     
 }
 
-# 2. ProveedorController.java — agregar endpoint GET /{id}
-
-Añadir los imports necesarios y el método debajo de getProveedores():
-
-import org.springframework.http.HttpStatus;
-
-import org.springframework.http.ResponseEntity;
-
+# 2. ProveedorController.java 
 
 @GetMapping("/{id}")
 
-public ResponseEntity<Proveedor> getProveedorPorId(@PathVariable Long id) {
-
-    Proveedor proveedor = proveedorService.buscarPorId(id);
+    public ResponseEntity<Proveedor> getProveedorPorId(@PathVariable Long id) {
     
-    if (proveedor == null) {
-    
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Proveedor proveedor = proveedorService.buscarPorId(id);
+        
+        if (proveedor == null) {
+        
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            
+        }
+        
+        return new ResponseEntity<>(proveedor, HttpStatus.OK);
         
     }
-    
-    return new ResponseEntity<>(proveedor, HttpStatus.OK);
-    
-}
